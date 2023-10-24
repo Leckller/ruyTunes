@@ -8,15 +8,22 @@ function Home() {
   const userLoc = useLocation();
   const user = userLoc.pathname.split('/')[2];
   const [search, setSearch] = useState<AlbumType[]>([]);
+  const [pesquisa, setPesquisa] = useState('');
   useEffect(() => {
     const effect = async () => {
       const response = await searchAlbumsAPI('Luisa Sonza');
-      const response2 = await getMusics('1488005628');
-      console.log(response2);
       setSearch(response);
     };
     effect();
   }, []);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const effect = async () => {
+      const response = await searchAlbumsAPI(pesquisa);
+      setSearch(response);
+    };
+    effect();
+  };
   return (
     <>
       <header>
@@ -37,7 +44,14 @@ function Home() {
           Playlists
         </aside>
         <div>
-          <input type="text" />
+          <form onSubmit={ (e) => handleSubmit(e) }>
+            <input
+              type="text"
+              value={ pesquisa }
+              onChange={ (e) => setPesquisa(e.target.value) }
+            />
+            <button type="submit">Pesquisar</button>
+          </form>
         </div>
         <section>
           {search.length > 0 && search.map((e) => (
