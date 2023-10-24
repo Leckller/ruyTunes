@@ -1,12 +1,29 @@
 import { Route, Routes } from 'react-router-dom';
-import Login from './pages/Login';
+import { createGlobalStyle } from 'styled-components';
+import Login from './pages/Login/Login';
+import Home from './pages/Home/Home';
+import Albums from './pages/Albums/Albums';
 
 function App() {
+  const GlobalStyle = createGlobalStyle`
+    *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body{
+      background-color: #222;
+    }
+  `;
   return (
-    <Routes>
-      <Route path="/" element={ <Login /> } />
-      <Route path="/home/:user" />
-    </Routes>
+    <>
+      <GlobalStyle />
+      <Routes>
+        <Route path="/" element={ <Login /> } />
+        <Route path="/home/:user" element={ <Home /> } />
+        <Route path="/album/:id" element={ <Albums /> } />
+      </Routes>
+    </>
   );
 }
 

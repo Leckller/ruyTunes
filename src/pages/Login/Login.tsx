@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../redux/actions/UserActions';
+import { login } from '../../redux/actions/UserActions';
 
-function Home() {
+function Login() {
   const [user, setUser] = useState({
     name: '',
     password: '',
@@ -45,4 +45,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Login;

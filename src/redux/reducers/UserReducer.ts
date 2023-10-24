@@ -3,16 +3,17 @@ import { LOGIN } from '../actions/UserActions';
 
 const INITIAL_STATE = {
   users: [
-    {
-      name: '',
-      password: '',
-    },
   ],
 };
 
 const UserReducer = (state = INITIAL_STATE, action: AnyAction) => {
   switch (action.type) {
     case LOGIN: {
+      if (state.users
+        .some((e: { name: string, password: number }) => e.name
+        === action.payload.name && e.password === action.payload.password)) {
+        return { ...state };
+      }
       return {
         users: [...state.users, action.payload],
       };
