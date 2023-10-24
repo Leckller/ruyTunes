@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import searchAlbumsAPI from '../../services/albumsApi';
 import { AlbumType } from '../../types';
+import { HeaderHome, MainHome } from './HomeStyle';
 
 function Home() {
   const userLoc = useLocation();
@@ -25,23 +26,16 @@ function Home() {
   };
   return (
     <>
-      <header>
-        <h1>
-          {
+      <HeaderHome>
+        <div>
+          <h1>
+            {
             `
               Bem Vindo ${user}
             `
           }
-        </h1>
-        <nav>
-          <Link to="/configuracoes">Configurações</Link>
-          <Link to="/">login</Link>
-        </nav>
-      </header>
-      <main>
-        <aside>
-          Playlists
-        </aside>
+          </h1>
+        </div>
         <div>
           <form onSubmit={ (e) => handleSubmit(e) }>
             <input
@@ -52,17 +46,24 @@ function Home() {
             <button type="submit">Pesquisar</button>
           </form>
         </div>
+        <nav>
+          <Link to="/configuracoes">Cnfg</Link>
+          <Link to="/">login</Link>
+        </nav>
+      </HeaderHome>
+      <MainHome>
+        {[0].length > 2 && <aside>Playlists</aside>}
         <section>
           {search.length > 0 && search.map((e) => (
             <article key={ e.collectionId }>
               <Link to={ `/album/${e.collectionId}` }>
                 <img src={ e.artworkUrl100 } alt={ e.collectionName } />
-                <h2>{e.collectionName}</h2>
+                <h2>{e.collectionName.split('-')[0].split('(')[0]}</h2>
               </Link>
             </article>
           ))}
         </section>
-      </main>
+      </MainHome>
     </>
   );
 }
