@@ -7,6 +7,7 @@ export const MainLogin = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: black;
   section{
     height: 60%;
     width: 30%;
