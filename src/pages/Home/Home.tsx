@@ -3,16 +3,20 @@ import { useLocation, Link } from 'react-router-dom';
 import searchAlbumsAPI from '../../services/albumsApi';
 import { AlbumType } from '../../types';
 import { HeaderHome, MainHome } from './HomeStyle';
+import Loading from '../../components/Loading';
 
 function Home() {
   const userLoc = useLocation();
   const user = userLoc.pathname.split('/')[2];
   const [search, setSearch] = useState<AlbumType[]>([]);
   const [pesquisa, setPesquisa] = useState('');
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const effect = async () => {
+      setLoading(true);
       const response = await searchAlbumsAPI('Luisa Sonza');
       setSearch(response);
+      setLoading(false);
     };
     effect();
   }, []);
@@ -24,6 +28,7 @@ function Home() {
     };
     effect();
   };
+  if (loading) return <Loading />;
   return (
     <>
       <HeaderHome>

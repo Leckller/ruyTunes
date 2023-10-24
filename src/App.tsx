@@ -14,6 +14,7 @@ function App() {
     body{
       background-color: #222;
       color: #eaeaea;
+      overflow-x: hidden;
     }
   `;
   return (

@@ -2,15 +2,29 @@ import styled from 'styled-components';
 
 export const MainAlbums = styled.main`
   width: 100vw;
+  margin: 5vh 1vw;
   display: flex;
-  flex-direction: column;
-
+  justify-content: center;
+  table{
+    width: 100%;
+    margin-right: 2vw;
+  }
 `;
 
-export const HeaderAlbums = styled.header`
+export const AudioAlbums = styled.audio`
+`;
+
+type HeaderAlbumsType = {
+  Colors: { one: string, two: string, three: string }
+};
+
+export const HeaderAlbums = styled.header<HeaderAlbumsType>`
   width: 100vw;
-  height: 30vh;
-  margin: 1vw;
+  height: 40vh;
+  padding: 1vw;
+  overflow: hidden;
+  background: linear-gradient(${(props) => props.Colors.one}
+  , ${(props) => props.Colors.two});
   nav{
     display: flex;
     flex-direction: row;
@@ -29,7 +43,7 @@ export const HeaderAlbums = styled.header`
   }
   section{
     display: flex;
-    height: 100%;
+    height: 80%;
     margin: 1vw 0%;
     div{
       display: flex;
