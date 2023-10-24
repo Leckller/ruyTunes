@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import searchAlbumsAPI from '../../services/albumsApi';
 import { AlbumType } from '../../types';
-import getMusics from '../../services/musicsApi';
 
 function Home() {
   const userLoc = useLocation();
