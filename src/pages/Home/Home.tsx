@@ -68,7 +68,11 @@ function Home() {
               <Link to={ `/album/${e.collectionId}` }>
                 <img src={ e.artworkUrl100 } alt={ e.collectionName } />
                 <h2>{e.collectionName.split('-')[0].split('(')[0]}</h2>
-                <h3>{`${e.releaseDate.split('T')[0]} * ${e.artistName}`}</h3>
+                <h3>
+                  {`${e.releaseDate.split('T')[0].split('-')[0]
+                  } * ${e.artistName}`}
+
+                </h3>
               </Link>
             </article>
           ))}
