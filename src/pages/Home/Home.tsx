@@ -1,9 +1,11 @@
+/* eslint-disable react/jsx-max-depth */
 import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import searchAlbumsAPI from '../../services/albumsApi';
 import { AlbumType } from '../../types';
-import { HeaderHome, MainHome } from './HomeStyle';
+import { FormHome, HeaderHome, MainHome } from './HomeStyle';
 import Loading from '../../components/Loading';
+import Lupa from '../../assets/lupa(1).png';
 
 function Home() {
   const userLoc = useLocation();
@@ -14,7 +16,7 @@ function Home() {
   useEffect(() => {
     const effect = async () => {
       setLoading(true);
-      const response = await searchAlbumsAPI('Luisa Sonza');
+      const response = await searchAlbumsAPI('Nirvana');
       setSearch(response);
       setLoading(false);
     };
@@ -42,14 +44,16 @@ function Home() {
           </h1>
         </div>
         <div>
-          <form onSubmit={ (e) => handleSubmit(e) }>
-            <input
-              type="text"
-              value={ pesquisa }
-              onChange={ (e) => setPesquisa(e.target.value) }
-            />
-            <button type="submit">Pesquisar</button>
-          </form>
+          <FormHome onSubmit={ (e) => handleSubmit(e) }>
+            <label htmlFor="search">
+              <button type="submit"><img src={ Lupa } alt="lupa" /></button>
+              <input
+                type="text"
+                value={ pesquisa }
+                onChange={ (e) => setPesquisa(e.target.value) }
+              />
+            </label>
+          </FormHome>
         </div>
         <nav>
           <Link to="/configuracoes">Cnfg</Link>
@@ -64,6 +68,7 @@ function Home() {
               <Link to={ `/album/${e.collectionId}` }>
                 <img src={ e.artworkUrl100 } alt={ e.collectionName } />
                 <h2>{e.collectionName.split('-')[0].split('(')[0]}</h2>
+                <h3>{`${e.releaseDate.split('T')[0]} * ${e.artistName}`}</h3>
               </Link>
             </article>
           ))}
