@@ -30,10 +30,11 @@ function Login() {
             name="name"
             onChange={ (e) => handleChange(e) }
             required
-            placeholder="xerolaine"
+            placeholder="name"
           />
           <input
             type="password"
+            placeholder="password"
             required
             name="password"
             value={ user.password }
