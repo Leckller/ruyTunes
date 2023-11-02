@@ -2,9 +2,9 @@
 /* eslint-disable react/jsx-max-depth */
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import getMusics from '../../services/musicsApi';
-import { AlbumType, SongType } from '../../types';
+import { AlbumType, GlobalState, SongType } from '../../types';
 import { AudioAlbums, HeaderAlbums, MainAlbums } from './AlbumsStyle';
 import RandomColors from '../../services/RandomColor';
 import Loading from '../../components/Loading';
@@ -18,6 +18,7 @@ function Albums() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const logins = useSelector((state:GlobalState) => state.UserReducer.users);
   const user = userLoc.pathname.split('/')[2];
   useEffect(() => {
     const effect = async () => {
@@ -31,7 +32,9 @@ function Albums() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleOnClickFav = (e: SongType) => {
-    dispatch(fav(e));
+    const index = logins.findIndex((ef) => ef.on === true);
+    console.log(logins[index]);
+    dispatch(fav(e, logins[index]));
   };
   if (loading) return <Loading />;
   return (
@@ -44,7 +47,7 @@ function Albums() {
           </div>
           <div>
             <button>.</button>
-            <button>.</button>
+            <button onClick={ () => navigate('/') }>.</button>
           </div>
         </nav>
         <section>

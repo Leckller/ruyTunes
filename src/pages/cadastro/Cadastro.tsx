@@ -8,9 +8,9 @@ function Cadastro() {
   const [user, setUser] = useState({
     name: '',
     password: '',
-    favoriteSongs: [],
     image: '',
-    on: false,
+    on: true,
+    favoriteSongs: [],
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();

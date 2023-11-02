@@ -31,12 +31,16 @@ const UserReducer = (state = INITIAL_STATE, action: AnyAction) => {
     }
     case FAV: {
       const { song, user } = action.payload;
+      console.log(user);
+      console.log(user.favoriteSongs);
       return {
-        users: [...state.users.filter((e: UserType) => e.name !== user.name),
+        users: [
+          ...state.users.filter((e: UserType) => e.name !== user.name),
           {
-            user,
-            favoritesSongs: [...user.favoriteSongs, song],
-          }],
+            ...user,
+            favoriteSongs: [...user.favoriteSongs, song],
+          },
+        ],
       };
     }
     default: return {

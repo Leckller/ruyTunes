@@ -20,6 +20,7 @@ function Login() {
       dispatch(onOf(logins[index]));
       return navigate(`/home/${user.name}`);
     }
+    // eslint-disable-next-line no-alert
     alert('Login inválido');
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
