@@ -10,6 +10,8 @@ import RandomColors from '../../services/RandomColor';
 import Loading from '../../components/Loading';
 import ConvMillis from '../../services/ConvMillis';
 import { fav } from '../../redux/actions/UserActions';
+import fHeart from '../../assets/silhueta-de-formato-simples-de-coracao.png';
+import heart from '../../assets/contorno-em-forma-de-coracao.png';
 
 function Albums() {
   const userLoc = useLocation();
@@ -20,6 +22,8 @@ function Albums() {
   const dispatch = useDispatch();
   const logins = useSelector((state:GlobalState) => state.UserReducer.users);
   const user = userLoc.pathname.split('/')[2];
+  const actLogin = logins[logins.findIndex((ef) => ef.on === true)];
+
   useEffect(() => {
     const effect = async () => {
       setLoading(true);
@@ -31,10 +35,9 @@ function Albums() {
     effect();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const handleOnClickFav = (e: SongType) => {
-    const index = logins.findIndex((ef) => ef.on === true);
-    console.log(logins[index]);
-    dispatch(fav(e, logins[index]));
+    dispatch(fav(e, actLogin));
   };
   if (loading) return <Loading />;
   return (
@@ -92,8 +95,17 @@ function Albums() {
                 </td>
                 <td>{ConvMillis(e.trackTimeMillis)}</td>
                 <td>
-                  <button onClick={ () => handleOnClickFav(e) }>
-                    fav ou noFav
+                  <button
+                    onClick={ (eP) => {
+                      eP.preventDefault();
+                      handleOnClickFav(e);
+                    } }
+                  >
+                    <img
+                      src={ actLogin.favoriteSongs
+                        .some((eS) => eS.trackName === e.trackName) ? fHeart : heart }
+                      alt="botão de curtir"
+                    />
                   </button>
                 </td>
               </tr>

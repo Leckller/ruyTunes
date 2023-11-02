@@ -8,6 +8,15 @@ export const MainAlbums = styled.main`
   table{
     width: 100%;
     margin-right: 2vw;
+    img{
+      width: 100%;
+    }
+    button{
+      width: 30px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
   }
 `;
 
