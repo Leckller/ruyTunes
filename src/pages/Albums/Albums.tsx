@@ -2,20 +2,23 @@
 /* eslint-disable react/jsx-max-depth */
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import getMusics from '../../services/musicsApi';
 import { AlbumType, SongType } from '../../types';
 import { AudioAlbums, HeaderAlbums, MainAlbums } from './AlbumsStyle';
 import RandomColors from '../../services/RandomColor';
 import Loading from '../../components/Loading';
 import ConvMillis from '../../services/ConvMillis';
+import { fav } from '../../redux/actions/UserActions';
 
 function Albums() {
   const userLoc = useLocation();
   const [musics, setMusics] = useState<SongType[]>([]);
   const [album, setAlbum] = useState<AlbumType>();
   const [loading, setLoading] = useState(false);
-  const user = userLoc.pathname.split('/')[2];
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = userLoc.pathname.split('/')[2];
   useEffect(() => {
     const effect = async () => {
       setLoading(true);
@@ -27,6 +30,9 @@ function Albums() {
     effect();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const handleOnClickFav = (e: SongType) => {
+    dispatch(fav(e));
+  };
   if (loading) return <Loading />;
   return (
     <>
@@ -62,6 +68,7 @@ function Albums() {
               <th>Title</th>
               <th>Track</th>
               <th>Time</th>
+              <th>Favorite</th>
             </tr>
           </thead>
           <tbody>
@@ -81,6 +88,11 @@ function Albums() {
                   </AudioAlbums>
                 </td>
                 <td>{ConvMillis(e.trackTimeMillis)}</td>
+                <td>
+                  <button onClick={ () => handleOnClickFav(e) }>
+                    fav ou noFav
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

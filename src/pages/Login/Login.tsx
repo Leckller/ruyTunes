@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { MainLogin } from './LoginStyle';
 import { GlobalState } from '../../types';
+import { onOf } from '../../redux/actions/UserActions';
 
 function Login() {
   const [user, setUser] = useState({
@@ -10,10 +11,13 @@ function Login() {
     password: '',
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const logins = useSelector((state:GlobalState) => state.UserReducer.users);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (logins.some((eS) => eS.name === user.name && eS.password === user.password)) {
+      const index = logins.findIndex((eF) => eF.name === user.name);
+      dispatch(onOf(logins[index]));
       return navigate(`/home/${user.name}`);
     }
     alert('Login inválido');

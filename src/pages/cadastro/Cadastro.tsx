@@ -2,18 +2,22 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { MainLogin } from '../Login/LoginStyle';
-import { login } from '../../redux/actions/UserActions';
+import { login, onOf } from '../../redux/actions/UserActions';
 
 function Cadastro() {
   const [user, setUser] = useState({
     name: '',
     password: '',
+    favoriteSongs: [],
+    image: '',
+    on: false,
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(login(user));
+    dispatch(onOf(user));
     navigate(`/home/${user.name}`);
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

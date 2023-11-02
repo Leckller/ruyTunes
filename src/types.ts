@@ -13,13 +13,6 @@ export type AlbumType = {
   primaryGenreName: string,
 };
 
-export type UserType = {
-  name: string;
-  email: string;
-  image: string;
-  description: string;
-};
-
 export type SongType = {
   trackId: number,
   trackName: string,
@@ -27,12 +20,17 @@ export type SongType = {
   trackTimeMillis: number,
 };
 
+export type UserType = {
+  name: string,
+  password: string,
+  favoriteSongs: SongType[],
+  image: string,
+  on: boolean,
+};
+
 export type GlobalState = {
   UserReducer: {
-    users: {
-      name: string,
-      password: string,
-    }[]
+    users: UserType[]
   },
   Apis: {
     lastSearch: { xd: string }[],

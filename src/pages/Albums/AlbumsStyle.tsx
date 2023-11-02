@@ -52,6 +52,7 @@ export const HeaderAlbums = styled.header<HeaderAlbumsType>`
       h1{
         margin: 0 1vw;
         font-size: 5rem;
+        letter-spacing: 3px;
       }
       span{
         display: flex;
