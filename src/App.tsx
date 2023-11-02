@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
 import Albums from './pages/Albums/Albums';
+import Cadastro from './pages/cadastro/Cadastro';
 
 function App() {
   const GlobalStyle = createGlobalStyle`
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={ <Login /> } />
         <Route path="/home/:user" element={ <Home /> } />
         <Route path="/album/:id" element={ <Albums /> } />
+        <Route path="/cadastro" element={ <Cadastro /> } />
       </Routes>
     </>
   );

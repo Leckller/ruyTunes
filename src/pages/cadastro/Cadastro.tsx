@@ -1,22 +1,20 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { MainLogin } from './LoginStyle';
-import { GlobalState } from '../../types';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { MainLogin } from '../Login/LoginStyle';
+import { login } from '../../redux/actions/UserActions';
 
-function Login() {
+function Cadastro() {
   const [user, setUser] = useState({
     name: '',
     password: '',
   });
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const logins = useSelector((state:GlobalState) => state.UserReducer.users);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (logins.some((eS) => eS.name === user.name && eS.password === user.password)) {
-      return navigate(`/home/${user.name}`);
-    }
-    alert('Login inválido');
+    dispatch(login(user));
+    navigate(`/home/${user.name}`);
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -44,12 +42,12 @@ function Login() {
             minLength={ 8 }
             maxLength={ 12 }
           />
-          <button type="submit">Logar</button>
-          <Link to="/cadastro">Não possui uma conta? cadastre-se!</Link>
+
+          <button type="submit">Cadastrar</button>
         </form>
       </section>
     </MainLogin>
   );
 }
 
-export default Login;
+export default Cadastro;
