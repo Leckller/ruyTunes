@@ -1,9 +1,11 @@
 import { AnyAction } from 'redux';
 import { LOGIN } from '../actions/UserActions';
 
+const key = 'users';
+const local = JSON.parse(localStorage.getItem(key) as string);
+
 const INITIAL_STATE = {
-  users: [
-  ],
+  users: localStorage.getItem(key) ? local : [],
 };
 
 const UserReducer = (state = INITIAL_STATE, action: AnyAction) => {
@@ -14,6 +16,7 @@ const UserReducer = (state = INITIAL_STATE, action: AnyAction) => {
         === action.payload.name && e.password === action.payload.password)) {
         return { ...state };
       }
+      localStorage.setItem(key, JSON.stringify([...INITIAL_STATE.users, action.payload]));
       return {
         users: [...state.users, action.payload],
       };
