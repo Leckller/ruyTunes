@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const MainHome = styled.main`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   section{
     display: flex;
     flex-flow: row wrap;
@@ -41,4 +41,19 @@ export const MainHome = styled.main`
       }
     }
   }
+`;
+
+export const DivBemVindo = styled.section`
+  width: 98%;
+  height: 200px;
+  background-color: #474646;
+  border-radius: 10px;
+  padding-top: 80px;
+  margin: 0 10px 10px 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: start;
+  font-size: 3rem;
+  padding-left: 10px;
 `;

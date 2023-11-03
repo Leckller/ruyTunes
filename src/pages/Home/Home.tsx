@@ -4,20 +4,26 @@ import { useLocation, Link } from 'react-router-dom';
 import searchAlbumsAPI from '../../services/albumsApi';
 import { AlbumType } from '../../types';
 import Loading from '../../components/Loading';
-import { MainHome } from './HomeStyle';
+import { DivBemVindo, MainHome } from './HomeStyle';
+import albumGenres from '../../services/AlbumGenres';
 
 function Home() {
   const userLoc = useLocation();
   const user = userLoc.pathname.split('/')[2];
-  const [search, setSearch] = useState<AlbumType[]>([]);
+  const [searchPop, setSearchPop] = useState<AlbumType[]>([]);
+  const [searchRock, setSearchRock] = useState<AlbumType[]>([]);
+  const [searchMpb, setSearchMpb] = useState<AlbumType[]>([]);
   const [pesquisa, setPesquisa] = useState('');
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const effect = async () => {
       setLoading(true);
-      const response = await searchAlbumsAPI('pop');
-      console.log(response);
-      setSearch(response);
+      const responsePop = await albumGenres('pop');
+      const responseRock = await albumGenres('rock');
+      const responseMpb = await albumGenres('mpb');
+      setSearchPop(responsePop.slice(0, 5));
+      setSearchRock(responseRock.slice(6, 11));
+      setSearchMpb(responseMpb.slice(0, 5));
       setLoading(false);
     };
     effect();
@@ -26,16 +32,60 @@ function Home() {
     e.preventDefault();
     const effect = async () => {
       const response = await searchAlbumsAPI(pesquisa);
-      setSearch(response);
+      setSearchPop(response);
     };
     effect();
   };
   if (loading) return <Loading />;
   return (
     <MainHome>
-      {[0].length > 2 && <aside>Playlists</aside>}
+      <DivBemVindo>
+        {`Olá ${user}`}
+      </DivBemVindo>
       <section>
-        {search.length > 0 && search.map((e) => (
+        <div>
+          <h2>Pop</h2>
+          <Link to="/">Ver mais</Link>
+        </div>
+        {searchPop.length > 0 && searchPop.map((e) => (
+          <article key={ e.collectionId }>
+            <Link to={ `/album/${e.collectionId}` }>
+              <img src={ e.artworkUrl100 } alt={ e.collectionName } />
+              <h2>{e.collectionName.split('-')[0].split('(')[0]}</h2>
+              <h3>
+                {`${e.releaseDate.split('T')[0].split('-')[0]
+                } * ${e.artistName}`}
+
+              </h3>
+            </Link>
+          </article>
+        ))}
+      </section>
+      <section>
+        <div>
+          <h2>Rock</h2>
+          <Link to="/">Ver mais</Link>
+        </div>
+        {searchRock.length > 0 && searchRock.map((e) => (
+          <article key={ e.collectionId }>
+            <Link to={ `/album/${e.collectionId}` }>
+              <img src={ e.artworkUrl100 } alt={ e.collectionName } />
+              <h2>{e.collectionName.split('-')[0].split('(')[0]}</h2>
+              <h3>
+                {`${e.releaseDate.split('T')[0].split('-')[0]
+                } * ${e.artistName}`}
+
+              </h3>
+            </Link>
+          </article>
+        ))}
+      </section>
+      <section>
+        <div>
+          <h2>Mpb</h2>
+          <Link to="/">Ver mais</Link>
+        </div>
+        {searchMpb.length > 0 && searchMpb.map((e) => (
           <article key={ e.collectionId }>
             <Link to={ `/album/${e.collectionId}` }>
               <img src={ e.artworkUrl100 } alt={ e.collectionName } />

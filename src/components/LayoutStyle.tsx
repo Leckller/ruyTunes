@@ -70,7 +70,7 @@ export const DivHeaderAndOutlet = styled.div`
         }
       }
       div:nth-child(1){
-        margin-left: 10px;
+        margin-left: 20px;
         display: flex;
         justify-content: space-around;
         width: 80px;
