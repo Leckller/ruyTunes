@@ -15,7 +15,7 @@ export const SecLayoutAlbums = styled.section`
     display: flex;
     flex-direction: column;
     width: 80px;
-    height: 100vh;
+    height: 95vh;
     border: solid white 2px;
     article{
       display: flex;
@@ -58,6 +58,8 @@ export const DivHeaderAndOutlet = styled.div`
       display: flex;
       width: 90%;
       height: 100%;
+      margin-top: 10px;
+      margin-left: 10px;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;

@@ -4,7 +4,7 @@ import { useLocation, Link } from 'react-router-dom';
 import searchAlbumsAPI from '../../services/albumsApi';
 import { AlbumType } from '../../types';
 import Loading from '../../components/Loading';
-import { DivBemVindo, MainHome } from './HomeStyle';
+import { DivBemVindo, MainHome, SecAlbums } from './HomeStyle';
 import albumGenres from '../../services/AlbumGenres';
 
 function Home() {
@@ -42,7 +42,7 @@ function Home() {
       <DivBemVindo>
         {`Olá ${user}`}
       </DivBemVindo>
-      <section>
+      <SecAlbums>
         <div>
           <h2>Pop</h2>
           <Link to="/">Ver mais</Link>
@@ -60,8 +60,8 @@ function Home() {
             </Link>
           </article>
         ))}
-      </section>
-      <section>
+      </SecAlbums>
+      <SecAlbums>
         <div>
           <h2>Rock</h2>
           <Link to="/">Ver mais</Link>
@@ -79,8 +79,8 @@ function Home() {
             </Link>
           </article>
         ))}
-      </section>
-      <section>
+      </SecAlbums>
+      <SecAlbums>
         <div>
           <h2>Mpb</h2>
           <Link to="/">Ver mais</Link>
@@ -98,7 +98,7 @@ function Home() {
             </Link>
           </article>
         ))}
-      </section>
+      </SecAlbums>
     </MainHome>
   );
 }
