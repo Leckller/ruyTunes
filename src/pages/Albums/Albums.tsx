@@ -44,7 +44,11 @@ function Albums() {
           </div>
         </section>
       </HeaderAlbums>
-      <Album musicas={ { songs: musics } } />
+      <Album
+        musicas={ { songs: musics,
+          infos: {
+            alt: '', image: '', name: '', path: '' } } }
+      />
     </>
   );
 }
