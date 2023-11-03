@@ -13,6 +13,7 @@ function Album({ musicas }: { musicas: AlbumUserType | undefined }) {
   const handleOnClickFav = (e: SongType) => {
     dispatch(fav(e, actLogin));
   };
+  console.log(musicas);
   return (
     <MainAlbums>
       <table>
@@ -26,7 +27,7 @@ function Album({ musicas }: { musicas: AlbumUserType | undefined }) {
           </tr>
         </thead>
         <tbody>
-          {musicas && musicas.songs.map((e, i) => (
+          {musicas?.songs && musicas.songs.map((e, i) => (
             <tr key={ e.trackId }>
               <td>{i}</td>
               <td><h3>{e.trackName}</h3></td>

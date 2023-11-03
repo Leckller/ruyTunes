@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { MainLogin } from '../Login/LoginStyle';
 import { login, onOf } from '../../redux/actions/UserActions';
-import fHeart from '../../assets/silhueta-de-formato-simples-de-coracao.png';
 
 function Cadastro() {
   const [user, setUser] = useState({
@@ -12,15 +11,7 @@ function Cadastro() {
     image: '',
     on: true,
     favoriteSongs: [],
-    albums: [{
-      infos: {
-        name: 'curtidos',
-        image: fHeart,
-        alt: 'curtidos',
-        path: '/curtidos',
-      },
-      songs: [],
-    }],
+    albums: [],
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,7 +23,6 @@ function Cadastro() {
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === 'image') {
-      console.log(e.target.value.split('\\')[2]);
       const imagem = e.target.value.split('\\')[2];
       setUser({ ...user, [e.target.name]: imagem });
     }
