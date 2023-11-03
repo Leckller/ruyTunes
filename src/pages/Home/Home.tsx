@@ -16,7 +16,8 @@ function Home() {
   useEffect(() => {
     const effect = async () => {
       setLoading(true);
-      const response = await searchAlbumsAPI('Nirvana');
+      const response = await searchAlbumsAPI('pop');
+      console.log(response);
       setSearch(response);
       setLoading(false);
     };
@@ -33,33 +34,7 @@ function Home() {
   if (loading) return <Loading />;
   return (
     <>
-      <HeaderHome>
-        <div>
-          <h1>
-            {
-            `
-              Bem Vindo ${user}
-            `
-          }
-          </h1>
-        </div>
-        <div>
-          <FormHome onSubmit={ (e) => handleSubmit(e) }>
-            <label htmlFor="search">
-              <button type="submit"><img src={ Lupa } alt="lupa" /></button>
-              <input
-                type="text"
-                value={ pesquisa }
-                onChange={ (e) => setPesquisa(e.target.value) }
-              />
-            </label>
-          </FormHome>
-        </div>
-        <nav>
-          <Link to="/configuracoes">Cnfg</Link>
-          <Link to="/">login</Link>
-        </nav>
-      </HeaderHome>
+      oi
       <MainHome>
         {[0].length > 2 && <aside>Playlists</aside>}
         <section>

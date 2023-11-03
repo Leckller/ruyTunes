@@ -4,6 +4,7 @@ import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
 import Albums from './pages/Albums/Albums';
 import Cadastro from './pages/cadastro/Cadastro';
+import Layout from './components/Layout';
 
 function App() {
   const GlobalStyle = createGlobalStyle`
@@ -23,8 +24,10 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={ <Login /> } />
-        <Route path="/home/:user" element={ <Home /> } />
-        <Route path="/album/:id" element={ <Albums /> } />
+        <Route element={ <Layout /> }>
+          <Route path="/home/:user" element={ <Home /> } />
+          <Route path="/album/:id" element={ <Albums /> } />
+        </Route>
         <Route path="/cadastro" element={ <Cadastro /> } />
       </Routes>
     </>
