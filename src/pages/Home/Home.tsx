@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-max-depth */
 import { useEffect, useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import searchAlbumsAPI from '../../services/albumsApi';
+import { useLocation } from 'react-router-dom';
 import { AlbumType } from '../../types';
 import Loading from '../../components/Loading';
-import { DivBemVindo, MainHome, SecAlbums } from './HomeStyle';
+import { DivBemVindo, MainHome } from './HomeStyle';
 import albumGenres from '../../services/AlbumGenres';
+import Fileiras from '../../components/Fileiras';
 
 function Home() {
   const userLoc = useLocation();
@@ -13,7 +13,6 @@ function Home() {
   const [searchPop, setSearchPop] = useState<AlbumType[]>([]);
   const [searchRock, setSearchRock] = useState<AlbumType[]>([]);
   const [searchMpb, setSearchMpb] = useState<AlbumType[]>([]);
-  const [pesquisa, setPesquisa] = useState('');
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const effect = async () => {
@@ -28,77 +27,16 @@ function Home() {
     };
     effect();
   }, []);
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const effect = async () => {
-      const response = await searchAlbumsAPI(pesquisa);
-      setSearchPop(response);
-    };
-    effect();
-  };
+
   if (loading) return <Loading />;
   return (
     <MainHome>
       <DivBemVindo>
         {`Olá ${user}`}
       </DivBemVindo>
-      <SecAlbums>
-        <div>
-          <h2>Pop</h2>
-          <Link to="/">Ver mais</Link>
-        </div>
-        {searchPop.length > 0 && searchPop.map((e) => (
-          <article key={ e.collectionId }>
-            <Link to={ `/album/${e.collectionId}` }>
-              <img src={ e.artworkUrl100 } alt={ e.collectionName } />
-              <h2>{e.collectionName.split('-')[0].split('(')[0]}</h2>
-              <h3>
-                {`${e.releaseDate.split('T')[0].split('-')[0]
-                } * ${e.artistName}`}
-
-              </h3>
-            </Link>
-          </article>
-        ))}
-      </SecAlbums>
-      <SecAlbums>
-        <div>
-          <h2>Rock</h2>
-          <Link to="/">Ver mais</Link>
-        </div>
-        {searchRock.length > 0 && searchRock.map((e) => (
-          <article key={ e.collectionId }>
-            <Link to={ `/album/${e.collectionId}` }>
-              <img src={ e.artworkUrl100 } alt={ e.collectionName } />
-              <h2>{e.collectionName.split('-')[0].split('(')[0]}</h2>
-              <h3>
-                {`${e.releaseDate.split('T')[0].split('-')[0]
-                } * ${e.artistName}`}
-
-              </h3>
-            </Link>
-          </article>
-        ))}
-      </SecAlbums>
-      <SecAlbums>
-        <div>
-          <h2>Mpb</h2>
-          <Link to="/">Ver mais</Link>
-        </div>
-        {searchMpb.length > 0 && searchMpb.map((e) => (
-          <article key={ e.collectionId }>
-            <Link to={ `/album/${e.collectionId}` }>
-              <img src={ e.artworkUrl100 } alt={ e.collectionName } />
-              <h2>{e.collectionName.split('-')[0].split('(')[0]}</h2>
-              <h3>
-                {`${e.releaseDate.split('T')[0].split('-')[0]
-                } * ${e.artistName}`}
-
-              </h3>
-            </Link>
-          </article>
-        ))}
-      </SecAlbums>
+      <Fileiras albums={ searchPop } infos={ { genre: 'Pop', rota: '/' } } />
+      <Fileiras albums={ searchRock } infos={ { genre: 'Rock', rota: '/' } } />
+      <Fileiras albums={ searchMpb } infos={ { genre: 'Mpb', rota: '/' } } />
     </MainHome>
   );
 }

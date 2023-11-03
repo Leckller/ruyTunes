@@ -4,7 +4,6 @@ export const MainHome = styled.main`
   display: flex;
   flex-direction: column;
   width: 100%;
-  border: solid red 1px;
   height: auto;
   padding: 10px;
   background: linear-gradient(#282aa170, black);
@@ -38,19 +37,31 @@ export const SecAlbums = styled.section`
       }
     }
     article{
-      width: 200px;
+      width: 220px;
       height: 85%;
-      border: solid green 1px;
       display: flex;
+      box-shadow: 3px 3px 10px black;
       flex-direction: column;
       align-items: center;
-      background-color: grey;
+      background-color: #2c2c2c;
       border-radius: 15px;
       padding: 30px 0;
       a{
         display: flex;
         flex-direction: column;
         width: 90%;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        img{
+          border-radius: 5px;
+        }
+        h2{
+          transform: translateY(20px);
+        }
+        h3{
+          transform: translateY(20px);
+        }
       }
 }
 `;
@@ -68,4 +79,5 @@ export const DivBemVindo = styled.section`
   align-items: start;
   font-size: 3rem;
   padding-left: 10px;
+  box-shadow: 3px 3px 10px black;
 `;

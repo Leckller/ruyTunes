@@ -16,14 +16,21 @@ export const SecLayoutAlbums = styled.section`
     flex-direction: column;
     width: 80px;
     height: 95vh;
-    border: solid white 2px;
     article{
       display: flex;
       padding: 10px;
       flex-direction: column;
-      bordeR: solid white 2px;
       margin-bottom: 10px;
+      border-radius: 10px;
+      margin-right: 10px;
       align-items: center;
+      box-shadow: 3px 3px 10px black;
+      img{
+        width: 100%;
+      }
+      button{
+        cursor: pointer;
+      }
     }
     article:nth-child(1){
       height: 30%;
@@ -80,9 +87,9 @@ export const DivHeaderAndOutlet = styled.div`
       }
       div:nth-child(2){
         display: flex;
-        width: 50px;
+        width: 40px;
         justify-content: end;
-        height: 80%;
+        height: 40px;
       }
     }
 }
