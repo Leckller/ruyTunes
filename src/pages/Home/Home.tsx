@@ -1,15 +1,17 @@
 /* eslint-disable react/jsx-max-depth */
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { AlbumType } from '../../types';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { AlbumType, GlobalState } from '../../types';
 import Loading from '../../components/Loading';
 import { DivBemVindo, MainHome } from './HomeStyle';
 import albumGenres from '../../services/AlbumGenres';
 import Fileiras from '../../components/Fileiras';
 
 function Home() {
-  const userLoc = useLocation();
-  const user = userLoc.pathname.split('/')[2];
+  const user = useSelector((state:GlobalState) => state.UserReducer.users
+    .find((e) => e.on));
+  const navigate = useNavigate();
   const [searchPop, setSearchPop] = useState<AlbumType[]>([]);
   const [searchRock, setSearchRock] = useState<AlbumType[]>([]);
   const [searchMpb, setSearchMpb] = useState<AlbumType[]>([]);
@@ -27,12 +29,11 @@ function Home() {
     };
     effect();
   }, []);
-
   if (loading) return <Loading />;
   return (
     <MainHome>
       <DivBemVindo>
-        {`Olá ${user}`}
+        {`Olá ${user?.name === undefined ? navigate('/') : user.name}`}
       </DivBemVindo>
       <Fileiras albums={ searchPop } infos={ { genre: 'Pop', rota: '/' } } />
       <Fileiras albums={ searchRock } infos={ { genre: 'Rock', rota: '/' } } />

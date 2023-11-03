@@ -31,6 +31,7 @@ function App() {
           <Route path="/album/:id" element={ <Albums /> } />
         </Route>
         <Route path="/cadastro" element={ <Cadastro /> } />
+        <Route path="/*" element={ <Login /> } />
       </Routes>
     </>
   );

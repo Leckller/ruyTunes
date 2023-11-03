@@ -20,12 +20,23 @@ export type SongType = {
   trackTimeMillis: number,
 };
 
+export type AlbumUserType = {
+  infos: {
+    name: string,
+    image: string,
+    alt: string,
+    path: string,
+  },
+  songs: SongType[],
+};
+
 export type UserType = {
   name: string,
   password: string,
   favoriteSongs: SongType[],
   image: string,
   on: boolean,
+  albums: AlbumUserType[],
 };
 
 export type GlobalState = {
