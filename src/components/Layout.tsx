@@ -5,6 +5,7 @@ import { DivHeaderAndOutlet, LayoutDad, SecLayoutAlbums } from './LayoutStyle';
 import homeImg from '../assets/botao-de-inicio.png';
 import searchImg from '../assets/lupa(1).png';
 import { GlobalState } from '../types';
+import fHeart from '../assets/silhueta-de-formato-simples-de-coracao.png';
 
 function Layout() {
   const navigate = useNavigate();
@@ -28,6 +29,10 @@ function Layout() {
           </button>
         </article>
         <article>
+          <button onClick={ () => navigate('/userAlbum/curtidos') }>
+            <img src={ fHeart } alt="curtidos" />
+          </button>
+
           {user?.albums.map((e) => (
             <button key={ e.infos.path } onClick={ () => navigate(e.infos.path) }>
               <img src={ e.infos.image } alt={ e.infos.alt } />

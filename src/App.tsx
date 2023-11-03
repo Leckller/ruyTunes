@@ -6,6 +6,7 @@ import Albums from './pages/Albums/Albums';
 import Cadastro from './pages/cadastro/Cadastro';
 import Layout from './components/Layout';
 import Search from './pages/search/Search';
+import AlbumUser from './pages/AlbumUser/AlbumUser';
 
 function App() {
   const GlobalStyle = createGlobalStyle`
@@ -29,6 +30,7 @@ function App() {
           <Route path="/home/:user" element={ <Home /> } />
           <Route path="/search/:user" element={ <Search /> } />
           <Route path="/album/:id" element={ <Albums /> } />
+          <Route path="/userAlbum/:id" element={ <AlbumUser /> } />
         </Route>
         <Route path="/cadastro" element={ <Cadastro /> } />
         <Route path="/*" element={ <Login /> } />

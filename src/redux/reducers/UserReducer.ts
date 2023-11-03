@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { AnyAction } from 'redux';
 import { FAV, LOGIN, ONOF } from '../actions/UserActions';
 import { SongType, UserType } from '../../types';
