@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import getMusics from '../../services/musicsApi';
 import { AlbumType, SongType } from '../../types';
-import { ColorDiv, HeaderAlbums } from './AlbumsStyle';
+import { ColorDiv } from './AlbumsStyle';
 import RandomColors from '../../services/RandomColor';
 import Loading from '../../components/Loading';
 import Album from '../../components/Album';
+import HeaderAlbum from '../../components/HeaderAlbum';
 
 function Albums() {
   const userLoc = useLocation();
@@ -28,20 +29,7 @@ function Albums() {
   if (loading) return <Loading />;
   return (
     <ColorDiv Colors={ RandomColors() }>
-      <HeaderAlbums Colors={ RandomColors() }>
-        <section>
-          {album && <img src={ album.artworkUrl100 } alt="Capa do Album" />}
-          <div>
-            {album && <h1>{album.collectionName}</h1>}
-            <span>
-              {album && <h3>{album.artistName}</h3>}
-              {album && <h4>{album.releaseDate.split('-')[0]}</h4>}
-              {album && <h5>{`Tracks: ${album.trackCount}`}</h5>}
-              {album && <h5>{album.primaryGenreName}</h5>}
-            </span>
-          </div>
-        </section>
-      </HeaderAlbums>
+      <HeaderAlbum album={ album as AlbumType } />
       <Album
         musicas={ { songs: musics,
           infos: {
