@@ -1,10 +1,8 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable react/jsx-max-depth */
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import getMusics from '../../services/musicsApi';
 import { AlbumType, SongType } from '../../types';
-import { HeaderAlbums } from './AlbumsStyle';
+import { ColorDiv, HeaderAlbums } from './AlbumsStyle';
 import RandomColors from '../../services/RandomColor';
 import Loading from '../../components/Loading';
 import Album from '../../components/Album';
@@ -29,7 +27,7 @@ function Albums() {
 
   if (loading) return <Loading />;
   return (
-    <>
+    <ColorDiv Colors={ RandomColors() }>
       <HeaderAlbums Colors={ RandomColors() }>
         <section>
           {album && <img src={ album.artworkUrl100 } alt="Capa do Album" />}
@@ -49,7 +47,7 @@ function Albums() {
           infos: {
             alt: '', image: '', name: '', path: '' } } }
       />
-    </>
+    </ColorDiv>
   );
 }
 

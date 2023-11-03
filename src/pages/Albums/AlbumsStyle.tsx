@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 export const MainAlbums = styled.main`
-  width: 100vw;
-  margin: 5vh 1vw;
+  width: 100%;
   display: flex;
   justify-content: center;
+  background-color: #00000029;
   table{
+    margin: 5vh 1vw;
     width: 100%;
     margin-right: 2vw;
     img{
@@ -27,13 +28,15 @@ type HeaderAlbumsType = {
   Colors: { one: string, two: string, three: string }
 };
 
-export const HeaderAlbums = styled.header<HeaderAlbumsType>`
+export const ColorDiv = styled.div<HeaderAlbumsType>`
+    background: linear-gradient(${(props) => props.Colors.one}
+  , #2222225b);
+`;
+
+export const HeaderAlbums = styled.section<HeaderAlbumsType>`
   width: 100vw;
-  height: 40vh;
+  height: 200px;
   padding: 1vw;
-  overflow: hidden;
-  background: linear-gradient(${(props) => props.Colors.one}
-  , ${(props) => props.Colors.two});
   nav{
     display: flex;
     flex-direction: row;
