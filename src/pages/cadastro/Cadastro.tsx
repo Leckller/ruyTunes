@@ -21,6 +21,11 @@ function Cadastro() {
     navigate(`/home/${user.name}`);
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.name === 'image') {
+      console.log(e.target.value.split('\\')[2]);
+      const imagem = e.target.value.split('\\')[2];
+      setUser({ ...user, [e.target.name]: imagem });
+    }
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   return (
@@ -46,7 +51,14 @@ function Cadastro() {
             minLength={ 8 }
             maxLength={ 12 }
           />
-
+          <input
+            type="file"
+            alt="your photo"
+            value={ user.image }
+            name="image"
+            onChange={ (e) => handleChange(e) }
+          />
+          <img src={ user.image } alt="preview" />
           <button type="submit">Cadastrar</button>
         </form>
       </section>

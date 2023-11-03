@@ -44,6 +44,7 @@ const UserReducer = (state = INITIAL_STATE, action: AnyAction) => {
           ],
         };
       }
+      localStorage.setItem(key, JSON.stringify([...INITIAL_STATE.users, action.payload]));
       return {
         users: [
           ...state.users.filter((e: UserType) => e.name !== user.name),

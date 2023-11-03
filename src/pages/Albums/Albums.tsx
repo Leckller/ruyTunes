@@ -12,6 +12,7 @@ import ConvMillis from '../../services/ConvMillis';
 import { fav } from '../../redux/actions/UserActions';
 import fHeart from '../../assets/silhueta-de-formato-simples-de-coracao.png';
 import heart from '../../assets/contorno-em-forma-de-coracao.png';
+import engrenagem from '../../assets/engrenagem.png';
 
 function Albums() {
   const userLoc = useLocation();
@@ -23,7 +24,6 @@ function Albums() {
   const logins = useSelector((state:GlobalState) => state.UserReducer.users);
   const user = userLoc.pathname.split('/')[2];
   const actLogin = logins[logins.findIndex((ef) => ef.on === true)];
-
   useEffect(() => {
     const effect = async () => {
       setLoading(true);
@@ -49,8 +49,10 @@ function Albums() {
             <button onClick={ () => navigate(+1) }>{'>'}</button>
           </div>
           <div>
-            <button>.</button>
-            <button onClick={ () => navigate('/') }>.</button>
+            <button><img src={ actLogin.image } alt="perfil" /></button>
+            <button onClick={ () => navigate('/') }>
+              <img src={ engrenagem } alt="configurações" />
+            </button>
           </div>
         </nav>
         <section>
