@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/jsx-max-depth */
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import getMusics from '../../services/musicsApi';
 import { AlbumType, SongType } from '../../types';
-import { AudioAlbums, HeaderAlbums, MainAlbums } from './AlbumsStyle';
+import { HeaderAlbums } from './AlbumsStyle';
 import RandomColors from '../../services/RandomColor';
 import Loading from '../../components/Loading';
-import ConvMillis from '../../services/ConvMillis';
+import Album from '../../components/Album';
 
 function Albums() {
   const userLoc = useLocation();
@@ -15,7 +15,6 @@ function Albums() {
   const [album, setAlbum] = useState<AlbumType>();
   const [loading, setLoading] = useState(false);
   const user = userLoc.pathname.split('/')[2];
-  const navigate = useNavigate();
   useEffect(() => {
     const effect = async () => {
       setLoading(true);
@@ -27,20 +26,11 @@ function Albums() {
     effect();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   if (loading) return <Loading />;
   return (
     <>
       <HeaderAlbums Colors={ RandomColors() }>
-        <nav>
-          <div>
-            <button onClick={ () => navigate(-1) }>{'<'}</button>
-            <button onClick={ () => navigate(+1) }>{'>'}</button>
-          </div>
-          <div>
-            <button>.</button>
-            <button>.</button>
-          </div>
-        </nav>
         <section>
           {album && <img src={ album.artworkUrl100 } alt="Capa do Album" />}
           <div>
@@ -54,38 +44,11 @@ function Albums() {
           </div>
         </section>
       </HeaderAlbums>
-      <MainAlbums>
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Title</th>
-              <th>Track</th>
-              <th>Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {musics.length > 0 && musics.map((e, i) => (
-              <tr key={ e.trackId }>
-                <td>{i}</td>
-                <td><h3>{e.trackName}</h3></td>
-                <td>
-                  <AudioAlbums
-                    data-testid="audio-component"
-                    src={ e.previewUrl }
-                    controls
-                  >
-                    <track kind="captions" />
-                    O seu navegador não suporta este elemento
-                    <code>audio</code>
-                  </AudioAlbums>
-                </td>
-                <td>{ConvMillis(e.trackTimeMillis)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </MainAlbums>
+      <Album
+        musicas={ { songs: musics,
+          infos: {
+            alt: '', image: '', name: '', path: '' } } }
+      />
     </>
   );
 }

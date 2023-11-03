@@ -8,6 +8,15 @@ export const MainAlbums = styled.main`
   table{
     width: 100%;
     margin-right: 2vw;
+    img{
+      width: 100%;
+    }
+    button{
+      width: 30px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
   }
 `;
 
@@ -35,10 +44,14 @@ export const HeaderAlbums = styled.header<HeaderAlbumsType>`
       height: 2rem;
       border-radius: 100%;
       border: none;
-      background-color: black;
+      background-color: #494949;
       margin: 0 5px;
       color: white;
       cursor: pointer;
+      img{
+      width: 10px;
+      transform: scale(300%)
+    }
     }
   }
   section{
@@ -52,6 +65,7 @@ export const HeaderAlbums = styled.header<HeaderAlbumsType>`
       h1{
         margin: 0 1vw;
         font-size: 5rem;
+        letter-spacing: 3px;
       }
       span{
         display: flex;

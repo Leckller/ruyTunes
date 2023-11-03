@@ -1,84 +1,44 @@
 /* eslint-disable react/jsx-max-depth */
 import { useEffect, useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import searchAlbumsAPI from '../../services/albumsApi';
-import { AlbumType } from '../../types';
-import { FormHome, HeaderHome, MainHome } from './HomeStyle';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { AlbumType, GlobalState } from '../../types';
 import Loading from '../../components/Loading';
-import Lupa from '../../assets/lupa(1).png';
+import { DivBemVindo, MainHome } from './HomeStyle';
+import albumGenres from '../../services/AlbumGenres';
+import Fileiras from '../../components/Fileiras';
 
 function Home() {
-  const userLoc = useLocation();
-  const user = userLoc.pathname.split('/')[2];
-  const [search, setSearch] = useState<AlbumType[]>([]);
-  const [pesquisa, setPesquisa] = useState('');
+  const user = useSelector((state:GlobalState) => state.UserReducer.users
+    .find((e) => e.on));
+  const navigate = useNavigate();
+  const [searchPop, setSearchPop] = useState<AlbumType[]>([]);
+  const [searchRock, setSearchRock] = useState<AlbumType[]>([]);
+  const [searchMpb, setSearchMpb] = useState<AlbumType[]>([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const effect = async () => {
       setLoading(true);
-      const response = await searchAlbumsAPI('Nirvana');
-      setSearch(response);
+      const responsePop = await albumGenres('pop');
+      const responseRock = await albumGenres('rock');
+      const responseMpb = await albumGenres('mpb');
+      setSearchPop(responsePop.slice(0, 5));
+      setSearchRock(responseRock.slice(6, 11));
+      setSearchMpb(responseMpb.slice(0, 5));
       setLoading(false);
     };
     effect();
   }, []);
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const effect = async () => {
-      const response = await searchAlbumsAPI(pesquisa);
-      setSearch(response);
-    };
-    effect();
-  };
   if (loading) return <Loading />;
   return (
-    <>
-      <HeaderHome>
-        <div>
-          <h1>
-            {
-            `
-              Bem Vindo ${user}
-            `
-          }
-          </h1>
-        </div>
-        <div>
-          <FormHome onSubmit={ (e) => handleSubmit(e) }>
-            <label htmlFor="search">
-              <button type="submit"><img src={ Lupa } alt="lupa" /></button>
-              <input
-                type="text"
-                value={ pesquisa }
-                onChange={ (e) => setPesquisa(e.target.value) }
-              />
-            </label>
-          </FormHome>
-        </div>
-        <nav>
-          <Link to="/configuracoes">Cnfg</Link>
-          <Link to="/">login</Link>
-        </nav>
-      </HeaderHome>
-      <MainHome>
-        {[0].length > 2 && <aside>Playlists</aside>}
-        <section>
-          {search.length > 0 && search.map((e) => (
-            <article key={ e.collectionId }>
-              <Link to={ `/album/${e.collectionId}` }>
-                <img src={ e.artworkUrl100 } alt={ e.collectionName } />
-                <h2>{e.collectionName.split('-')[0].split('(')[0]}</h2>
-                <h3>
-                  {`${e.releaseDate.split('T')[0].split('-')[0]
-                  } * ${e.artistName}`}
-
-                </h3>
-              </Link>
-            </article>
-          ))}
-        </section>
-      </MainHome>
-    </>
+    <MainHome>
+      <DivBemVindo>
+        {`Olá ${user?.name === undefined ? navigate('/') : user.name}`}
+      </DivBemVindo>
+      <Fileiras albums={ searchPop } infos={ { genre: 'Pop', rota: '/' } } />
+      <Fileiras albums={ searchRock } infos={ { genre: 'Rock', rota: '/' } } />
+      <Fileiras albums={ searchMpb } infos={ { genre: 'Mpb', rota: '/' } } />
+    </MainHome>
   );
 }
 
