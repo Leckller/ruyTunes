@@ -13,7 +13,6 @@ function Album({ musicas }: { musicas: AlbumUserType | undefined }) {
   const handleOnClickFav = (e: SongType) => {
     dispatch(fav(e, actLogin));
   };
-  console.log(musicas);
   return (
     <MainAlbums>
       <table>
