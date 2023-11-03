@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import searchAlbumsAPI from '../../services/albumsApi';
 import { AlbumType } from '../../types';
-import { FormHome, HeaderHome, MainHome } from './HomeStyle';
 import Loading from '../../components/Loading';
-import Lupa from '../../assets/lupa(1).png';
+import { MainHome } from './HomeStyle';
 
 function Home() {
   const userLoc = useLocation();
@@ -33,27 +32,24 @@ function Home() {
   };
   if (loading) return <Loading />;
   return (
-    <>
-      oi
-      <MainHome>
-        {[0].length > 2 && <aside>Playlists</aside>}
-        <section>
-          {search.length > 0 && search.map((e) => (
-            <article key={ e.collectionId }>
-              <Link to={ `/album/${e.collectionId}` }>
-                <img src={ e.artworkUrl100 } alt={ e.collectionName } />
-                <h2>{e.collectionName.split('-')[0].split('(')[0]}</h2>
-                <h3>
-                  {`${e.releaseDate.split('T')[0].split('-')[0]
-                  } * ${e.artistName}`}
+    <MainHome>
+      {[0].length > 2 && <aside>Playlists</aside>}
+      <section>
+        {search.length > 0 && search.map((e) => (
+          <article key={ e.collectionId }>
+            <Link to={ `/album/${e.collectionId}` }>
+              <img src={ e.artworkUrl100 } alt={ e.collectionName } />
+              <h2>{e.collectionName.split('-')[0].split('(')[0]}</h2>
+              <h3>
+                {`${e.releaseDate.split('T')[0].split('-')[0]
+                } * ${e.artistName}`}
 
-                </h3>
-              </Link>
-            </article>
-          ))}
-        </section>
-      </MainHome>
-    </>
+              </h3>
+            </Link>
+          </article>
+        ))}
+      </section>
+    </MainHome>
   );
 }
 

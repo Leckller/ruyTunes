@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-max-depth */
 import { Outlet } from 'react-router-dom';
-import { LayoutDad } from './LayoutStyle';
+import { DivHeaderAndOutlet, LayoutDad, SecLayoutAlbums } from './LayoutStyle';
 
 function Layout() {
   return (
     <LayoutDad>
-      <section>
+      <SecLayoutAlbums>
         <article>
           <button>home</button>
           <button>search</button>
@@ -13,8 +13,8 @@ function Layout() {
         <article>
           albums
         </article>
-      </section>
-      <div>
+      </SecLayoutAlbums>
+      <DivHeaderAndOutlet>
         <header>
           <nav>
             <div>
@@ -29,7 +29,7 @@ function Layout() {
           </nav>
         </header>
         <Outlet />
-      </div>
+      </DivHeaderAndOutlet>
     </LayoutDad>
   );
 }
