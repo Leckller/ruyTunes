@@ -25,11 +25,11 @@ export const AudioAlbums = styled.audio`
 `;
 
 type HeaderAlbumsType = {
-  Colors: { one: string, two: string, three: string }
+  Colors: string
 };
 
 export const ColorDiv = styled.div<HeaderAlbumsType>`
-    background: linear-gradient(${(props) => props.Colors.one}
+    background: linear-gradient(${(props) => props.Colors}
   , #2222225b);
 `;
 

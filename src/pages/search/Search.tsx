@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import searchAlbumsAPI from '../../services/albumsApi';
-import { MainHome } from '../Home/HomeStyle';
 import { AlbumType } from '../../types';
+import { MainSearch } from './SearchStyle';
 
 function Search() {
   const [pesquisa, setPesquisa] = useState('');
@@ -17,14 +17,7 @@ function Search() {
     effect();
   };
   return (
-    <MainHome>
-      <form onSubmit={ handleSubmit }>
-        <input
-          type="text"
-          value={ pesquisa }
-          onChange={ (e) => setPesquisa(e.target.value) }
-        />
-      </form>
+    <MainSearch>
       <section>
         {search && search.map((e) => (
           <article key={ e.collectionId }>
@@ -40,7 +33,7 @@ function Search() {
           </article>
         ))}
       </section>
-    </MainHome>
+    </MainSearch>
   );
 }
 

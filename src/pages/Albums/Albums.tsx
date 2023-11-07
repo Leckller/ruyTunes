@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import getMusics from '../../services/musicsApi';
 import { AlbumType, SongType } from '../../types';
 import { ColorDiv } from './AlbumsStyle';
-import RandomColors from '../../services/RandomColor';
 import Loading from '../../components/Loading';
 import Album from '../../components/Album';
 import HeaderAlbum from '../../components/HeaderAlbum';
@@ -28,7 +27,7 @@ function Albums() {
 
   if (loading) return <Loading />;
   return (
-    <ColorDiv Colors={ RandomColors() }>
+    <ColorDiv Colors={ `#${user.slice(-3)}` }>
       <HeaderAlbum album={ album as AlbumType } />
       <Album
         musicas={ { songs: musics,

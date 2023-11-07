@@ -43,7 +43,8 @@ export type GlobalState = {
   UserReducer: {
     users: UserType[]
   },
-  Apis: {
+  ApiReducer: {
+    loading: boolean,
     lastSearch: { xd: string }[],
     actualSearch: { xd: string }[],
   }

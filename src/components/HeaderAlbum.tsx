@@ -1,10 +1,12 @@
+import { useLocation } from 'react-router-dom';
 import { HeaderAlbums } from '../pages/Albums/AlbumsStyle';
-import RandomColors from '../services/RandomColor';
 import { AlbumType } from '../types';
 
 function HeaderAlbum({ album }: { album: AlbumType }) {
+  const userLoc = useLocation();
+  const user = userLoc.pathname.split('/')[2];
   return (
-    <HeaderAlbums Colors={ RandomColors() }>
+    <HeaderAlbums Colors={ `#${user.slice(-3)}` }>
       <section>
         {album && <img src={ album.artworkUrl100 } alt="Capa do Album" />}
         <div>
