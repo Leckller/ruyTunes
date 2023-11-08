@@ -12,7 +12,7 @@ function Perfil() {
   const navigate = useNavigate();
   const [edit, setEdit] = useState(true);
   const [NewUser, setNewUser] = useState({
-    name: '',
+    name: user[indexUser].name,
   });
   const handleOncHange = (key: string, value: string) => {
     setNewUser({ ...NewUser, [key]: value });
@@ -47,6 +47,7 @@ function Perfil() {
                 <input
                   type="text"
                   name="name"
+                  value={ NewUser.name }
                   placeholder={ user[indexUser].name }
                   onChange={ (({ target }) => handleOncHange(target.name, target.value)) }
                 />
