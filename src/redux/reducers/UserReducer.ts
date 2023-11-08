@@ -18,7 +18,7 @@ const UserReducer = (state = INITIAL_STATE, action: AnyAction) => {
         === action.payload.name && e.password === action.payload.password)) {
         return { ...state };
       }
-      localStorage.setItem(key, JSON.stringify([...INITIAL_STATE.users, action.payload]));
+      localStorage.setItem(key, JSON.stringify([...state.users, action.payload]));
       return {
         users: [...state.users, { ...action.payload }],
       };
@@ -34,6 +34,14 @@ const UserReducer = (state = INITIAL_STATE, action: AnyAction) => {
       const { song, user }: { song: SongType, user: UserType } = action.payload;
       const usuario: UserType = state.users.find((e: UserType) => e.name === user.name);
       if (usuario.favoriteSongs.some((eS:SongType) => eS === song)) {
+        localStorage.setItem(key, JSON.stringify(
+          [...state.users.filter((e: UserType) => e.name !== user.name),
+            {
+              ...user,
+              favoriteSongs: [...user.favoriteSongs
+                .filter((eS:SongType) => eS.trackName !== song.trackName)],
+            }],
+        ));
         return {
           users: [
             ...state.users.filter((e: UserType) => e.name !== user.name),
@@ -45,7 +53,7 @@ const UserReducer = (state = INITIAL_STATE, action: AnyAction) => {
           ],
         };
       }
-      localStorage.setItem(key, JSON.stringify([...INITIAL_STATE.users, action.payload]));
+      localStorage.setItem(key, JSON.stringify([...state.users, action.payload]));
       return {
         users: [
           ...state.users.filter((e: UserType) => e.name !== user.name),

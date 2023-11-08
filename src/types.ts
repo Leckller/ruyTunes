@@ -43,9 +43,10 @@ export type GlobalState = {
   UserReducer: {
     users: UserType[]
   },
-  Apis: {
-    lastSearch: { xd: string }[],
-    actualSearch: { xd: string }[],
+  ApiReducer: {
+    loading: boolean,
+    lastSearch: AlbumType[],
+    actualSearch: AlbumType[],
   }
 };
 

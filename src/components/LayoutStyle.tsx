@@ -49,18 +49,25 @@ export const SecLayoutAlbums = styled.section`
     }
 `;
 
-export const DivHeaderAndOutlet = styled.div`
+type DivHeaderAndOutletType = {
+  background: string,
+};
+
+export const DivHeaderAndOutlet = styled.div<DivHeaderAndOutletType>`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   height: 100%;
   width: 100%;
+  border-radius: 10px;
   header{
     display: flex;
     position: fixed;
     width: 100%;
-    height: 50px;
+    height: 100px;
     flex-direction: row;
+    background-color: ${(prop) => prop.background};
+    transition: 500ms;
     nav{
       display: flex;
       width: 90%;
@@ -71,25 +78,49 @@ export const DivHeaderAndOutlet = styled.div`
       justify-content: space-between;
       align-items: center;
       div{
+        width: 33%;
         button{
+          z-index: 2;
           width: 100%;
           margin: 0 1px 0 1px;
           height: 100%;
           border-radius: 50%;
+          border: none;
+          font-weight: 600;
+          background-color: #3a3a3a93;
+          color: white;
+          cursor: pointer;
         }
       }
       div:nth-child(1){
         margin-left: 20px;
         display: flex;
         justify-content: space-around;
-        width: 80px;
-        height: 80%;
+        width: 120px;
+        height: 60px;
       }
       div:nth-child(2){
+        form{
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          input{
+            width: 100%;
+            background-color: #00000033;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            outline: none;
+            color: white;
+          }
+        }
+      }
+      div:nth-child(3){
         display: flex;
-        width: 40px;
         justify-content: end;
-        height: 40px;
+        width: 60px;
+        height: 60px;
       }
     }
 }

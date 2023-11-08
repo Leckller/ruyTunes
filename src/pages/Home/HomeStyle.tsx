@@ -4,7 +4,7 @@ export const MainHome = styled.main`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: auto;
+  min-height: auto;
   padding: 10px;
   background: linear-gradient(#282aa170, black);
   @media (max-width: 500px) {

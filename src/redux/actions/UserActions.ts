@@ -1,4 +1,5 @@
-import { SongType, UserType } from '../../types';
+import searchAlbumsAPI from '../../services/albumsApi';
+import { AlbumType, Dispatch, SongType, UserType } from '../../types';
 
 export const LOGIN = 'LOGIN';
 
@@ -25,3 +26,37 @@ export const onOf = (user: UserType) => (
     payload: user,
   }
 );
+
+export const SEARCH_ON_OFF = 'SEARCH_ON_OFF';
+
+export const searchOnOf = () => ({
+  type: SEARCH_ON_OFF,
+});
+
+export const SEARCH_ERROR = 'SEARCH_ERROR';
+
+export const searchError = (search: string) => ({
+  type: SEARCH_ERROR,
+  payload: search,
+});
+
+export const SEARCH_COMPLETE = 'SEARCH_COMPLETE';
+
+export const searchComplete = (response: AlbumType[]) => ({
+  type: SEARCH_COMPLETE,
+  payload: response,
+});
+
+export const FETCH_SEARCH = 'FETCH_SEARCH';
+
+export const fetchSearch = (pesquisa: string) => {
+  return async (disp: Dispatch) => {
+    disp(searchOnOf());
+    try {
+      const fetch = await searchAlbumsAPI(pesquisa);
+      disp(searchComplete(fetch));
+    } catch (error: any) {
+      disp(searchError(error.message));
+    }
+  };
+};

@@ -5,7 +5,6 @@ import { AlbumUserType, GlobalState, SongType } from '../../types';
 import HeaderAlbum from '../../components/HeaderAlbum';
 import heart from '../../assets/silhueta-de-formato-simples-de-coracao.png';
 import { ColorDiv } from '../Albums/AlbumsStyle';
-import RandomColors from '../../services/RandomColor';
 
 function AlbumUser() {
   const user = useSelector((state:GlobalState) => state.UserReducer.users
@@ -13,7 +12,7 @@ function AlbumUser() {
   const name = useLocation().pathname.split('/')[2];
   if (name === 'curtidos') {
     return (
-      <ColorDiv Colors={ RandomColors() }>
+      <ColorDiv Colors="#123234">
         <HeaderAlbum
           album={ {
             artistId: 0,
