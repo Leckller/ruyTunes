@@ -31,6 +31,7 @@ type HeaderAlbumsType = {
 export const ColorDiv = styled.div<HeaderAlbumsType>`
     background: linear-gradient(${(props) => props.Colors}
   , #2222225b);
+  overflow-x: hidden;
 `;
 
 export const HeaderAlbums = styled.section<HeaderAlbumsType>`

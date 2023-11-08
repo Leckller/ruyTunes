@@ -5,7 +5,7 @@ const getMusics = async (id: string): Promise<[AlbumType, ...SongType[]]> => {
   const requestJson = await request.json();
   console.log(requestJson.results);
   const replaceImage = requestJson.results.map((
-    e:[AlbumType, ...SongType[]],
+    e:AlbumType,
     i: number,
   ) => {
     if (i === 0) {

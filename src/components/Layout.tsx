@@ -52,7 +52,7 @@ function Layout() {
         </article>
       </SecLayoutAlbums>
       <DivHeaderAndOutlet
-        onScrollCapture={ (e) => setScrollLoc(e.target.scrollTop) }
+        // onScrollCapture={ (e) => setScrollLoc(e.target.scrollTop) }
         background={ scrollLoc > 205 ? '#1e1e1ed9' : '' }
       >
         <header>
