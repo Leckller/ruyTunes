@@ -74,7 +74,7 @@ function Layout() {
               )}
             </div>
             <div>
-              <button>
+              <button onClick={ () => navigate('/perfil') }>
                 perfil
               </button>
             </div>

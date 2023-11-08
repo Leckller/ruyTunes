@@ -60,3 +60,10 @@ export const fetchSearch = (pesquisa: string) => {
     }
   };
 };
+
+export const USER_EDIT = 'USER_EDIT';
+
+export const userEdit = (user: UserType, edit: { name: string }) => ({
+  type: USER_EDIT,
+  payload: { user, edit },
+});
