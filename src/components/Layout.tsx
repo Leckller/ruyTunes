@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-max-depth */
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { DivHeaderAndOutlet, LayoutDad, SecLayoutAlbums } from './LayoutStyle';
 import homeImg from '../assets/botao-de-inicio.png';
 import searchImg from '../assets/lupa(1).png';
 import { GlobalState } from '../types';
 import fHeart from '../assets/silhueta-de-formato-simples-de-coracao.png';
-import searchAlbumsAPI from '../services/albumsApi';
+import { fetchSearch } from '../redux/actions/UserActions';
 
 function Layout() {
   const navigate = useNavigate();
@@ -18,10 +18,8 @@ function Layout() {
     .find((e) => e.on));
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const effect = async () => {
-      const response = await searchAlbumsAPI(pesquisa);
-    };
-    effect();
+    fetchSearch(pesquisa);
+    console.log(pesquisa);
   };
   return (
     <LayoutDad>
@@ -55,7 +53,6 @@ function Layout() {
       <DivHeaderAndOutlet
         onScrollCapture={ (e) => setScrollLoc(e.target.scrollTop) }
         background={ scrollLoc > 205 ? '#1e1e1ed9' : '' }
-        id="ladeira"
       >
         <header>
           <nav>
@@ -71,6 +68,7 @@ function Layout() {
                     value={ pesquisa }
                     onChange={ (e) => setPesquisa(e.target.value) }
                   />
+                  <button type="submit">search</button>
                 </form>
               )}
             </div>

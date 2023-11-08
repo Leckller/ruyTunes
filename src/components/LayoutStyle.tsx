@@ -59,7 +59,7 @@ export const DivHeaderAndOutlet = styled.div<DivHeaderAndOutletType>`
   overflow-y: auto;
   height: 100%;
   width: 100%;
-
+  border-radius: 10px;
   header{
     display: flex;
     position: fixed;
@@ -96,8 +96,8 @@ export const DivHeaderAndOutlet = styled.div<DivHeaderAndOutletType>`
         margin-left: 20px;
         display: flex;
         justify-content: space-around;
-        width: 80px;
-        height: 40px;
+        width: 120px;
+        height: 60px;
       }
       div:nth-child(2){
         form{
@@ -109,7 +109,7 @@ export const DivHeaderAndOutlet = styled.div<DivHeaderAndOutletType>`
             width: 100%;
             background-color: #00000033;
             border: none;
-            padding: 5px;
+            padding: 15px;
             border-radius: 10px;
             outline: none;
             color: white;
@@ -118,9 +118,9 @@ export const DivHeaderAndOutlet = styled.div<DivHeaderAndOutletType>`
       }
       div:nth-child(3){
         display: flex;
-        width: 40px;
         justify-content: end;
-        height: 40px;
+        width: 60px;
+        height: 60px;
       }
     }
 }

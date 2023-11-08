@@ -1,21 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import searchAlbumsAPI from '../../services/albumsApi';
 import { AlbumType } from '../../types';
 import { MainSearch } from './SearchStyle';
 
 function Search() {
-  const [pesquisa, setPesquisa] = useState('');
   const [search, setSearch] = useState<AlbumType[]>([]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const effect = async () => {
-      const response = await searchAlbumsAPI(pesquisa);
-      setSearch(response);
-    };
-    effect();
-  };
   return (
     <MainSearch>
       <section>
