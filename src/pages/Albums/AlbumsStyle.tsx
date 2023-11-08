@@ -35,7 +35,6 @@ export const ColorDiv = styled.div<HeaderAlbumsType>`
 
 export const HeaderAlbums = styled.section<HeaderAlbumsType>`
   width: 100vw;
-  height: 70%;
   padding: 1vw;
   nav{
     display: flex;
