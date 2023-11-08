@@ -8,7 +8,9 @@ function HeaderAlbum({ album }: { album: AlbumType }) {
   return (
     <HeaderAlbums Colors={ `#${user.slice(-3)}` }>
       <section>
-        {album && <img src={ album.artworkUrl100 } alt="Capa do Album" />}
+        <div>
+          {album && <img src={ album.artworkUrl100 } alt="Capa do Album" />}
+        </div>
         <div>
           {album && <h1>{album.collectionName}</h1>}
           <span>

@@ -1,24 +1,25 @@
 /* eslint-disable react/jsx-max-depth */
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { DivHeaderAndOutlet, LayoutDad, SecLayoutAlbums } from './LayoutStyle';
 import homeImg from '../assets/botao-de-inicio.png';
 import searchImg from '../assets/lupa(1).png';
-import { GlobalState } from '../types';
+import { Dispatch, GlobalState } from '../types';
 import fHeart from '../assets/silhueta-de-formato-simples-de-coracao.png';
 import { fetchSearch } from '../redux/actions/UserActions';
 
 function Layout() {
   const navigate = useNavigate();
   const loc = useLocation();
+  const dispatch: Dispatch = useDispatch();
   const [pesquisa, setPesquisa] = useState('');
   const [scrollLoc, setScrollLoc] = useState<number>(0);
   const user = useSelector((state:GlobalState) => state.UserReducer.users
     .find((e) => e.on));
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetchSearch(pesquisa);
+    dispatch(fetchSearch(pesquisa));
     console.log(pesquisa);
   };
   return (
@@ -62,13 +63,13 @@ function Layout() {
             </div>
             <div>
               {loc.pathname.split('/')[1] === 'search' && (
-                <form onSubmit={ handleSubmit }>
+                <form onSubmit={ (e) => handleSubmit(e) }>
                   <input
                     type="text"
                     value={ pesquisa }
                     onChange={ (e) => setPesquisa(e.target.value) }
+                    placeholder="Pesquisa por Cantor / Banda"
                   />
-                  <button type="submit">search</button>
                 </form>
               )}
             </div>

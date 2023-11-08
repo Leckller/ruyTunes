@@ -35,7 +35,7 @@ export const ColorDiv = styled.div<HeaderAlbumsType>`
 
 export const HeaderAlbums = styled.section<HeaderAlbumsType>`
   width: 100vw;
-  height: 30%;
+  height: 70%;
   padding: 1vw;
   nav{
     display: flex;
@@ -61,13 +61,17 @@ export const HeaderAlbums = styled.section<HeaderAlbumsType>`
     display: flex;
     height: 80%;
     margin: 1vw 0%;
-    div{
+    div:nth-child(1){
+      width: 30%;
+      padding-left: 30px;
+    }
+    div:nth-child(2){
       display: flex;
       flex-direction: column;
       justify-content: end;
       h1{
         margin: 0 1vw;
-        font-size: 5rem;
+        font-size: 3rem;
         letter-spacing: 3px;
       }
       span{

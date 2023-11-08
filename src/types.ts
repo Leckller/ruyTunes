@@ -45,8 +45,8 @@ export type GlobalState = {
   },
   ApiReducer: {
     loading: boolean,
-    lastSearch: { xd: string }[],
-    actualSearch: { xd: string }[],
+    lastSearch: AlbumType[],
+    actualSearch: AlbumType[],
   }
 };
 
