@@ -1,6 +1,6 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { AnyAction } from 'redux';
-import { FAV, LOGIN, ONOF } from '../actions/UserActions';
+import { FAV, LOGIN, ONOF, USER_EDIT } from '../actions/UserActions';
 import { SongType, UserType } from '../../types';
 
 const key = 'users';
@@ -60,6 +60,18 @@ const UserReducer = (state = INITIAL_STATE, action: AnyAction) => {
           {
             ...user,
             favoriteSongs: [...user.favoriteSongs, song],
+          },
+        ],
+      };
+    }
+    case USER_EDIT: {
+      const { user, edit } = action.payload;
+      return {
+        ...state,
+        users: [...state.users.filter((e: UserType) => !e.on),
+          {
+            ...user,
+            name: edit.name,
           },
         ],
       };
