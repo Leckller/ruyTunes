@@ -63,6 +63,10 @@ export const HeaderAlbums = styled.section<HeaderAlbumsType>`
     div:nth-child(1){
       width: 30%;
       padding-left: 30px;
+      img{
+        width: 200px;
+        height: 200px;
+      }
     }
     div:nth-child(2){
       display: flex;
