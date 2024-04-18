@@ -20,14 +20,16 @@ function Cadastro() {
   const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (indexUser === -1) {
+      dispatch(login(user));
+      dispatch(onOf(user));
+      navigate(`/home/${user.name}`);
+    }
     if (userOn[indexUser].name === user.name) {
       return alert(
         'Já temos um usuário com esse nome\n porfavor escolha um outro nome de usuário',
       );
     }
-    dispatch(login(user));
-    dispatch(onOf(user));
-    navigate(`/home/${user.name}`);
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === 'image') {
@@ -39,8 +41,8 @@ function Cadastro() {
   return (
     <MainLogin>
       <section>
+        <button onClick={ () => navigate('/') }>Voltar</button>
         <div>
-          <button onClick={ () => navigate('/') }>Voltar</button>
           <h1>RuyTunes</h1>
         </div>
         <form action="home" onSubmit={ (e) => handleSubmit(e) }>
@@ -62,14 +64,6 @@ function Cadastro() {
             minLength={ 8 }
             maxLength={ 12 }
           />
-          <input
-            type="file"
-            alt="your photo"
-            value={ user.image }
-            name="image"
-            onChange={ (e) => handleChange(e) }
-          />
-          <img src={ user.image } alt="preview" />
           <button type="submit">Cadastrar</button>
         </form>
       </section>

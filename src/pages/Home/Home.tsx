@@ -35,9 +35,9 @@ function Home() {
       <DivBemVindo>
         {`Olá ${user?.name === undefined ? navigate('/') : user.name}`}
       </DivBemVindo>
-      <Fileiras albums={ searchPop } infos={ { genre: 'Pop', rota: '/' } } />
-      <Fileiras albums={ searchRock } infos={ { genre: 'Rock', rota: '/' } } />
-      <Fileiras albums={ searchMpb } infos={ { genre: 'Mpb', rota: '/' } } />
+      <Fileiras albums={ searchPop } infos={ { genre: 'Pop', rota: '/genre/Pop' } } />
+      <Fileiras albums={ searchRock } infos={ { genre: 'Rock', rota: '/genre/Rock' } } />
+      <Fileiras albums={ searchMpb } infos={ { genre: 'Mpb', rota: '/genre/Mpb' } } />
     </MainHome>
   );
 }
