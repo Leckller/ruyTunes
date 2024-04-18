@@ -50,8 +50,8 @@ function Login() {
             maxLength={ 12 }
           />
           <button type="submit">Logar</button>
-          <Link to="/cadastro">Não possui uma conta? cadastre-se!</Link>
         </form>
+        <Link to="/cadastro">Não possui uma conta? cadastre-se!</Link>
       </section>
     </MainLogin>
   );

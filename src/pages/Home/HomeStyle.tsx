@@ -6,7 +6,7 @@ export const MainHome = styled.main`
   width: 100%;
   min-height: auto;
   padding: 10px;
-  background: linear-gradient(#282aa170, black);
+  background: linear-gradient(#13373a, #0c1d1f);
   @media (max-width: 500px) {
     section{
       article{
